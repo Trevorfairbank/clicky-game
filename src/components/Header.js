@@ -8,7 +8,7 @@ function Header() {
                 <h3 className="mx-auto">Click on an image to earn points, but don't click on any more than once!</h3>
             </div>
             <div className="row space">
-                <h3 className="mx-auto">⬇Scroll Down to Start⬇</h3>
+                <h3 className="mx-auto">⬇Scroll Down to Begin⬇</h3>
             </div>
         </div>
     );
