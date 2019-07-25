@@ -6,12 +6,6 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 import images from "./images.json";
 
-// // pick a random number up to but not including max
-// const pickRandom = max => Math.floor(Math.random() * max)
-
-// // pick out a random Legend
-// const randomLegendId = () => images[pickRandom(images.length)].id
-
 class App extends React.Component {
   
   state ={
@@ -66,7 +60,7 @@ class App extends React.Component {
     <Navbar score={this.state.score} topscore={this.state.topscore}/>
     <Header />
     <Main handleimageclick={this.handleImageClick} />
-    <Footer score={this.state.score} topscore={this.state.topscore}/>
+    <Footer />
     </div>
   );
   }
