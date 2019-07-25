@@ -1,11 +1,11 @@
 import React from "react";
 
-function Navbar() {
+function Navbar(props) {
     return (
         <div className="navbar sticky-top">
-            <h3 className="navbar-brand">APEX Legends Clicks</h3>
+            <h3 className="navbar-brand">A Memory Game</h3>
             <h3 className="navbar-brand">Click an image to begin!</h3>
-            <h3 className="navbar-brand">SCORE: 0 | Top Score: 0</h3>
+            <h3 className="navbar-brand">SCORE: {props.score} | Top Score: {props.topscore}</h3>
         </div>
     );
 }

@@ -4,44 +4,69 @@ import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
-import images from "./images.json"
+import images from "./images.json";
 
-// pick a random number up to but not including max
-const pickRandom = max => Math.floor(Math.random() * max)
+// // pick a random number up to but not including max
+// const pickRandom = max => Math.floor(Math.random() * max)
 
-// pick out a random pup
-const randomLegendId = () => images[pickRandom(images.length)].id
-
+// // pick out a random Legend
+// const randomLegendId = () => images[pickRandom(images.length)].id
 
 class App extends React.Component {
   
   state ={
-    clicks: 0,
+    images,
     score: 0,
-    currentLegendId: randomLegendId()
+    topscore: 0,
+    clickedarray: []
   }
 
-  //when image is clicked
-  handleImageClick = id => {
+   randomOrder = () => {
+    return this.state.images.sort(() => Math.random() - 0.5);
+  };
+
+  handleImageClick = event => {
+    const currentLegend = event.target.id;
+
+    const legendClicked = this.state.clickedarray.indexOf(currentLegend) > -1;
+    if (legendClicked){
+      this.setState({
+        images: this.randomOrder(),
+        clickedarray:[],
+        score:0,
+      })
+    alert("Sorry, try Again.")
+    }
+    else {
+      this.setState({
+        images: this.randomOrder(),
+        clickedarray:this.state.clickedarray.concat(currentLegend),
+        score:this.state.score + 1
+      })
+    }
+
+    //update topscore
+    if (this.state.score > this.state.topscore){
+      this.setState({ topscore: this.state.score});
+    }
+    if (this.state.score === 11){
+      alert("YOU WON!!! GREAT JOB!!!! NOW DO IT AGAIN.")
+      this.setState({
+        images: this.randomOrder(),
+        clickedarray:[],
+        score:0,
+      })
+    }
     
-    const newState = { clicks: this.state.clicks + 1 }
-
-    // did the user click the current Legend
-    if (id === this.state.currentLegendId) {
-      // increase score
-      newState.score = this.state.score + 1
-
   }
-  this.setState(newState);
-}
   
   render() {
   return (
     <div>
-    <Navbar />
+    <Navbar score={this.state.score} topscore={this.state.topscore}/>
     <Header />
-    <Main />
-    <Footer />
+    <Main handleimageclick={this.handleImageClick} />
+    <Footer score={this.state.score} topscore={this.state.topscore}/>
     </div>
   );
   }
